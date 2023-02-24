@@ -38,7 +38,7 @@ export default function WithSubnavigation() {
                     />
                 </Flex>
                 <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-                    <Link as={RouterLink} to="/home" color="brand.400">
+                    <Link as={RouterLink} to="/" color="brand.400">
                         <Logo />
                     </Link>
                     <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -55,7 +55,7 @@ export default function WithSubnavigation() {
                     <IconButton
                         // Link to frontend github
                         as={RouterLink}
-                        to="https://github.com/ahmad1702/chat-ai-frontend"
+                        to="https://github.com/ahmad1702/chat-ai-ml-2023"
                         target="_blank"
                         // Button Styles
                         fontSize='20px'
@@ -259,6 +259,14 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
     {
+        label: 'Home',
+        href: '/home',
+    },
+    {
+        label: 'Chat',
+        href: '/',
+    },
+    {
         label: 'Partners',
         children: [
             {
@@ -277,9 +285,5 @@ const NAV_ITEMS: Array<NavItem> = [
                 href: '#',
             },
         ],
-    },
-    {
-        label: 'Chat',
-        href: '/',
     },
 ];
