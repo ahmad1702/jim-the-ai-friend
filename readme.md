@@ -1,9 +1,11 @@
 <!-- PROJECT LOGO -->
-<br />
+
 <div align="center">
-    <img src="/assets/readme-header.png" alt="Logo" height="80">
     <h1 style="font-weight: 900" align="center">ChatAIML2023</h3>
+    <img src="/assets/readme-header.png" alt="Logo" width="100%">
 </div>
+
+---
 
 ## To Run Frontend
 
