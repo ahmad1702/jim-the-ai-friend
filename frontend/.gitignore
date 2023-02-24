@@ -25,3 +25,8 @@ dist-ssr
 
 # Env
 .env.*
+
+# NPM Caches, me no likey
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
