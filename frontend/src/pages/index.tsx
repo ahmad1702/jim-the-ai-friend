@@ -5,7 +5,6 @@ import useLocalStorageState from 'use-local-storage-state'
 import { fetchMLChatResponse } from '../api/chat'
 import NavBar from '../components/Navbar'
 import useAnimation from '../hooks/useAnimation'
-import { API_URL } from '../utils/constants'
 
 type Chat = {
   from: string;
@@ -57,7 +56,6 @@ const ChatInput = ({ onSubmit }: ChatInputProps) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value)
-    console.log(e.target.value)
   }
   const handleSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
     if (value.length === 0) return;
@@ -136,6 +134,14 @@ function ChatPage() {
   useEffect(() => {
     scrollToBottom()
   }, [chats])
+
+  useEffect(() => {
+    console.log({
+      env: import.meta.env,
+      location: window.location
+    })
+
+  }, [])
 
   const onChatInputSubmit = async (newMessage: string) => {
     const newChats = [{ from: currentUserName, content: newMessage }]

@@ -1,4 +1,3 @@
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
     Box, Button, Flex, FormControl,
     FormLabel, Heading, HStack, Icon, Input,

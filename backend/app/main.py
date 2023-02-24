@@ -3,14 +3,7 @@ from pydantic import BaseModel
 from .ml.chat import chat as ml_chat
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(
-    title="chat-ai-ml-2023",
-    version="1.0.0",
-    openapi_url="/api/openapi.json",
-    docs_url="/api/docs",
-    redoc_url=None,
-    root_path="/api", # Set the root path to /api
-)
+app = FastAPI()
 
 origins = [
     "http://localhost",
