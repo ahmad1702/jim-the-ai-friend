@@ -16,7 +16,8 @@ The model project gets edited in a <a href="https://colab.research.google.com/dr
 
 1. Access the Colab Notebook <a href="https://colab.research.google.com/drive/1RchSMU53kyKMPEHizHPCaqskX5H404zb">here</a>.
 2. Up top go to 'File' -> 'Save a Copy in Github'. This will open the 'Copy to Github' Modal
-3. Edit the fields so that it looks likes this:
+3. Edit the fields so that it looks likes this (Note: Feel free to change the commit message to a useful summary of the change):
+    <div align="center"> <img src="/assets/colab-save-to-github-screenshot.png" alt="colab-save-to-github-screenshot" width="100%" /> </div>
 4. Hit 'Ok', and a git commit will directly push to this repo. 
 
 Note: After doing this. it will only update the remote repo. To view the change locally, you need to push. The project would also have to be redeployed everytime an ML change is pushed (Perhaps a CI/CD that automatically redeploys when a push is made to the 'development' branch would simplifiy this).
