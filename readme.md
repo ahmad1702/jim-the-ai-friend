@@ -98,4 +98,9 @@ To run this build locally, you can do:
 
 ```sh
 docker-compose up
+
+# or if you don't want to do docker-compose:
+
+docker run  uvicorn app.main:app --root-path /api --proxy-headers --host 0.0.0.0 --port 8000 
+docker run -v ./Caddyfile:/etc/caddy/Caddyfile -v caddy-data:/data -v caddy-config:/config -p 8080:80 
 ```
