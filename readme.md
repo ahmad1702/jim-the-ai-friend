@@ -10,6 +10,18 @@
 There is a <a href="http://chat-ai-ml.surge.sh/" target="_blank">front-end only demo deployed</a>, but that is without a backend so the bot repeats what you say. Nonetheless, it shows every other feature as well as the styling. Once the ML algo is fully implemented, the only thing different would be the chat's response.
 
 ---
+# Updating the Model with Google Colab Jupyter Notebook
+
+The model project gets edited in a <a href="https://colab.research.google.com/drive/1RchSMU53kyKMPEHizHPCaqskX5H404zb">Google Colab Notebook that can be found here</a>.
+
+1. Access the Colab Notebook <a href="https://colab.research.google.com/drive/1RchSMU53kyKMPEHizHPCaqskX5H404zb">here</a>.
+2. Up top go to 'File' -> 'Save a Copy in Github'. This will open the 'Copy to Github' Modal
+3. Edit the fields so that it looks likes this:
+4. Hit 'Ok', and a git commit will directly push to this repo. 
+
+Note: After doing this. it will only update the remote repo. To view the change locally, you need to push. The project would also have to be redeployed everytime an ML change is pushed (Perhaps a CI/CD that automatically redeploys when a push is made to the 'development' branch would simplifiy this).
+
+---
 # Running the Application
 
 ## To Run Frontend
