@@ -36,4 +36,4 @@ async def input_chat(message: Message):
     msg = message.message
     if not msg:
         raise HTTPException(status_code=400, detail="Invalid Message")
-    return ml_chat(msg)
+    return await ml_chat(msg)
