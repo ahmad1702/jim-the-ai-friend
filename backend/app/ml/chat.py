@@ -1,33 +1,77 @@
 import os
 from json import load
+import torch
+import torch.nn as nn
+import json
+import nltk
+from nltk.stem.porter import PorterStemmer
+from torch.utils.data import Dataset, DataLoader
+import numpy as np
+import random
+from typing import Any
 
-# This file is dedicated to exposing a function fastapi can use to call the 'chat_input' function in the jim_ml.ipynb.
-# Python files apparently cant just import ipynb files, even though they both house python code, so this file is meant to bridge that gap.
+from .utils import (
+    tokenize,
+    stem,
+    bag_of_words,
+    all_words,
+    tags,
+    device,
+    intents,
+    model_filename,
+)
+from .models.neural_net import NeuralNet
 
-# The following code will open the 'jim_ml.ipynb file as a json, since ipynb's raw data is a json file.
-base_path = os.path.abspath(os.getcwd())
-current_dir =  base_path + '/app/ml/'
-filename = current_dir + 'jim_ml.ipynb'
+with open("./app/ml/new_intents.json", "r") as f:
+    intents = json.load(f)
 
-with open(filename) as fp:
-    nb = load(fp)
+if os.path.isfile(model_filename):
+    data = torch.load(model_filename)
+else:
+    from .train import data as new_data
 
-# The 'cells' key in the ipynb json contains the python code in the form of an array of cells
-# Here we are running all the cells in the current scope so that once the chat function below is ran,
-# it can call variables and functions written in the jim_ml.ipynb file.
-for cell in nb['cells']:
-    if cell['cell_type'] == 'code':
-        source = ''.join(line for line in cell['source'] if not line.startswith('%'))
-        exec(source, globals(), locals())
+    data: dict[str, Any] = new_data
+
+input_size = data["input_size"]
+hidden_size = data["hidden_size"]
+output_size = data["output_size"]
+all_words = data["all_words"]
+tags = data["tags"]
+model_state = data["model_state"]
+
+model = NeuralNet(input_size, hidden_size, output_size).to(device)
+model.load_state_dict(model_state)
+model.eval()
+
 
 async def chat(input):
     try:
-        # The Jupyter notebook will need a 'chat_input(input)' function
-        # that takes in an input string and
-        # responds with the chatbot's response as a string
-        return chat_input(input)
+        sentence = input
+        sentence = tokenize(sentence)
+        X = bag_of_words(sentence, all_words)
+        X = X.reshape(1, X.shape[0])
+        X = torch.from_numpy(X).to(device)
+
+        output = model(X)
+        _, predicted = torch.max(output, dim=1)
+
+        tag = tags[predicted.item()]
+
+        probs = torch.softmax(output, dim=1)
+        prob = probs[0][predicted.item()]
+        if prob.item() > 0.10:
+            for intent in intents["intents"]:
+                if tag == intent["tag"]:
+                    return {
+                        "message": random.choice(intent["responses"]),
+                    }
+        else:
+            return {
+                "message": "I do not understand...",
+            }
     except Exception as e:
         error = str(e)
         print(error)
-        return {"error": "Something went wrong calling the 'chat_input' from the jupyter notebook"}
-    
+        return {
+            "error": "Something went wrong calling the 'chat_input' from the jupyter notebook"
+        }

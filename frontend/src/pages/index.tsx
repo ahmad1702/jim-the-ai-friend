@@ -1,4 +1,4 @@
-import { Box, Icon, IconButton, Text, Textarea, useColorModeValue } from '@chakra-ui/react'
+import { Box, Container, Icon, IconButton, Text, Textarea, useColorModeValue } from '@chakra-ui/react'
 import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import React, { useEffect, useState } from 'react'
 import useLocalStorageState from 'use-local-storage-state'
@@ -83,10 +83,10 @@ const ChatInput = ({ onSubmit }: ChatInputProps) => {
     el.style.height = `${height}px`;
   }
   return (
-    <Box position="relative" p={4}>
+    <Box position="relative" py={4}>
       <form onSubmit={handleSubmit}>
         <Textarea
-          variant="filled"
+          variant='filled'
           rows={1}
           value={value}
           onChange={handleChange}
@@ -97,6 +97,7 @@ const ChatInput = ({ onSubmit }: ChatInputProps) => {
           w="full"
           pr={10}
           onKeyDown={handleKeyDown}
+          borderColor='gray.300'
         />
         <IconButton
           icon={<Icon as={PaperAirplaneIcon} />}
@@ -160,12 +161,13 @@ function ChatPage() {
   return (
     <Box bg="blackAlpha.50" height={'100vh'} display="flex" flexDirection="column" >
       <NavBar />
-      <Box
+      <Container
         p={4}
         flex="1"
         display="flex"
         flexDirection="column"
         overflow="hidden"
+        maxW="container.lg"
       >
         <Box
           ref={chatContainerRef}
@@ -176,7 +178,7 @@ function ChatPage() {
           {chats.map((chat, i) => <ChatMessage key={i} chat={chat} currentUserName={currentUserName} prevChat={chats.at(i - 1)} />)}
         </Box>
         <ChatInput onSubmit={onChatInputSubmit} />
-      </Box>
+      </Container>
     </Box>
   )
 }

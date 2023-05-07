@@ -20,7 +20,7 @@ export default function Hero() {
                     lineHeight={'110%'}>
                     Chatting... {' '}
                     <Text as={'span'} color={'brand.400'}>
-                        but for an ml class
+                        but with the power of AI
                     </Text>
                 </Heading>
                 <Text color={'gray.500'} maxW={'3xl'}>

@@ -4,7 +4,7 @@ export default function Logo(props: BoxProps) {
     return (
         <Box {...props}>
             <Text fontSize="lg" fontWeight="bold">
-                ChatAIML2023
+                Jim.AI
             </Text>
         </Box>
     );

@@ -266,24 +266,4 @@ const NAV_ITEMS: Array<NavItem> = [
         label: 'Chat',
         href: '/',
     },
-    {
-        label: 'Partners',
-        children: [
-            {
-                label: 'Zainab',
-                subLabel: 'Zainab Mohammed Taqi',
-                href: '#',
-            },
-            {
-                label: 'Ahmad',
-                subLabel: 'Ahmad Sandid',
-                href: '#',
-            },
-            {
-                label: 'Madeline',
-                subLabel: 'Madeline Saunders',
-                href: '#',
-            },
-        ],
-    },
 ];
