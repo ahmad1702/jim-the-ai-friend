@@ -18,6 +18,7 @@ from .utils import (
     xy,
     model_filename,
 )
+from .accum_model import get_model
 from .models.neural_net import NeuralNet
 
 # create training data
@@ -65,33 +66,30 @@ train_loader = DataLoader(
     dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=0
 )
 
-model = NeuralNet(input_size, hidden_size, output_size).to(device)
-
+model = get_model(input_size, hidden_size, output_size)
 
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-if not os.path.exists(model_filename):
-    # Train the model
-    for epoch in range(num_epochs):
-        for words, labels in train_loader:
-            words = words.to(device)
-            labels = labels.to(dtype=torch.long).to(device)
+for epoch in range(num_epochs):
+    for words, labels in train_loader:
+        words = words.to(device)
+        labels = labels.to(dtype=torch.long).to(device)
 
-            # Forward pass
-            outputs = model(words)
-            # if y would be one-hot, we must apply
-            # labels = torch.max(labels, 1)[1]
-            loss = criterion(outputs, labels)
+        # Forward pass
+        outputs = model(words)
+        # if y would be one-hot, we must apply
+        # labels = torch.max(labels, 1)[1]
+        loss = criterion(outputs, labels)
 
-            # Backward and optimize
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
+        # Backward and optimize
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
 
-        if (epoch + 1) % 100 == 0:
-            print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}")
+    if (epoch + 1) % 100 == 0:
+        print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}")
 
 
 print(f"final loss: {loss.item():.4f}")

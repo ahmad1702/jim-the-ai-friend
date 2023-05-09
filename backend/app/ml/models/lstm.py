@@ -1,13 +1,13 @@
 import torch.nn as nn
 
 
-# # Encoder Long-Short Term Memory (LSTM)
+# Encoder Long-Short Term Memory (LSTM)
 class LSTM(nn.Module):
-    def __init__(self, hidden_size, embedding, n_layers=1, dropout=0):
+    def __init__(self, hidden_size, vocab_size, n_layers=1, dropout=0):
         super(LSTM, self).__init__()
         self.n_layers = n_layers
         self.hidden_size = hidden_size
-        self.embedding = embedding
+        self.embedding = nn.Embedding(vocab_size, hidden_size)
 
         self.LSTM = nn.LSTM(
             hidden_size,

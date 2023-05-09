@@ -10,9 +10,10 @@ import numpy as np
 import random
 from typing import Any
 
+from .accum_model import get_model
+
 from .utils import (
     tokenize,
-    stem,
     bag_of_words,
     all_words,
     tags,
@@ -39,7 +40,7 @@ all_words = data["all_words"]
 tags = data["tags"]
 model_state = data["model_state"]
 
-model = NeuralNet(input_size, hidden_size, output_size).to(device)
+model = get_model(input_size, hidden_size, output_size).to(device)
 model.load_state_dict(model_state)
 model.eval()
 
