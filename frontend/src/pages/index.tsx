@@ -1,4 +1,4 @@
-import { Box, Container, Icon, IconButton, Text, Textarea, useColorModeValue } from '@chakra-ui/react'
+import { Box, Button, Container, Icon, IconButton, Text, Textarea, useColorModeValue } from '@chakra-ui/react'
 import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import React, { useEffect, useState } from 'react'
 import useLocalStorageState from 'use-local-storage-state'
@@ -168,7 +168,11 @@ function ChatPage() {
         flexDirection="column"
         overflow="hidden"
         maxW="container.lg"
+        position='relative'
       >
+        <Box position="absolute" left="0" top="0" width='full' zIndex={10} p='1'>
+          <Button size='sm' onClick={() => setChats([])}>Clear</Button>
+        </Box>
         <Box
           ref={chatContainerRef}
           flex="1"
