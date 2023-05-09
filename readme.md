@@ -13,20 +13,6 @@ There is a <a href="http://chat-ai-ml.surge.sh/" target="_blank">front-end only 
 
 ---
 
-# Updating the Model with Google Colab Jupyter Notebook
-
-The model project gets edited in a <a href="https://colab.research.google.com/drive/1RchSMU53kyKMPEHizHPCaqskX5H404zb">Google Colab Notebook that can be found here</a>.
-
-1. Access the Colab Notebook <a href="https://colab.research.google.com/drive/1RchSMU53kyKMPEHizHPCaqskX5H404zb">here</a>.
-2. Up top go to 'File' -> 'Save a Copy in Github'. This will open the 'Copy to Github' Modal
-3. Edit the fields so that it looks likes this (Note: Feel free to change the commit message to a useful summary of the change):
-<div align="center"> <img src="/assets/colab-save-to-github-screenshot.png" alt="colab-save-to-github-screenshot" width="100%" /> </div>
-4. Hit 'Ok', and a git commit will directly push to this repo.
-
-Note: After doing this. it will only update the remote repo. To view the change locally, you need to push. The project would also have to be redeployed everytime an ML change is pushed (Perhaps a CI/CD that automatically redeploys when a push is made to the 'development' branch would simplifiy this).
-
----
-
 # Running the Application
 
 ## To Run Frontend
@@ -123,8 +109,6 @@ docker run -v ./Caddyfile:/etc/caddy/Caddyfile -v caddy-data:/data -v caddy-conf
 
 The main goal of the project was to make a chatbot that someone could talk to, not as a substitution for counseling, but for when one feels down, lonely, or at the very least bored. The project's implementation involves the use of different AI and Non-AI techniques, namely RNN, Non-AI rule-based, MLP, and LSTM. The models were trained on questions and answers from counsel chat forums where certified psychologists and therapists would answer questions about mental health and a variety of similar topics.
 
-![](RackMultipart20230509-1-7v8fvl_html_437a575b8a188fd6.png)
-
 # **Research**
 
 The main objective of the project was to create a chatbot that could be conversed with when feeling down, lonely, or simply bored. The potential applications of our project could be in various domains where individuals may benefit from having someone to talk to, such as mental health support platforms, online communities, or even personal virtual assistants. It could serve as a tool to offer emotional support and engagement for individuals seeking companionship. Building and implementing a model for this topic came with several challenges. One challenge was ensuring that the chatbot responds appropriately and empathetically to the user's emotions and needs. It was difficult to capture the struggles of human conversation and provide meaningful responses. Additionally, it was crucial to handle sensitive topics and ensure the chatbot does not provide harmful or inaccurate advice. For our project, we collected questions and answers from counseling chat forums where certified psychologists and therapists would respond to users' queries about mental health and related topics. These datasets provided valuable training material for the chatbot models. Previous research in this area has used different methods to develop chatbot models. Some common techniques include recurrent neural networks (RNN), multilayer perceptron (MLP), long short-term memory (LSTM), and rule-based systems. These approaches help in capturing sequential information, understanding context, and generating relevant responses. Various approaches utilizing advanced natural language processing (NLP) techniques, such as transformer models like GPT-3 or BERT, have shown promising results in generating more contextually accurate and coherent responses. The success of the chatbot models in this task can be measured using several metrics. Some common metrics include response relevance, coherence, grammatical correctness, and overall user satisfaction with the conversation. Additionally, feedback from users, such as ratings or surveys, can be valuable in assessing the effectiveness of the chatbot in providing emotional support and companionship.
@@ -151,7 +135,7 @@ Stemming is the process of reducing words to their root form. For example, "runn
 
 Here, one can take a look at how words that are similar. This can cloud the dataset. Stemming solves this by finding the roots of the words, thus allowing one to focus on the semantics.
 
-![](RackMultipart20230509-1-7v8fvl_html_cc3b384eb9d4416.png)
+<img src="/assets/stemming.png" alt="Logo" width="100%">
 
 Removal of stop words is another technique we used. Stop words are words that are commonly used in a language but do not carry much meaning, such as "the," "and," and "a." Removing stop words from text data can help to reduce the size of the vocabulary and focus on the most meaningful words. This can be helpful in training chatbots to recognize important words and phrases that are likely to be used by users.
 
@@ -160,20 +144,16 @@ Removal of stop words is another technique we used. Stop words are words that ar
 In this project we created a few models, we used LTSM, MLP classifier, Attention Model and RNN. All those models are suitable to be used with chatbot implementation. We briefly used a bigram model mostly as a measure to see how it would handle text classification. Needless to say, it didn't do what we wanted, so the pipeline consists of the first four. The LSTM model can be used for named entity recognition using Backpropagation to keep context. An attention model has a different approach to context, where one embeds information at the token level, where each token, which in the case of NLP is usually a letter, has the context of the batch it's currently in. The embedding requires complex matrix multiplication and computation which makes it the hardest of the models to implement. An MLP classifier uses the concept of multiple neurons to process information and make predictions based on what they are. Finally, an RNN can be used for dialogue management. Using those models combined allows the chatbot to accurately recognize user intent, generate appropriate responses, and maintain a natural and engaging conversation with the user.
 
 Transformer Model:
-
-![](RackMultipart20230509-1-7v8fvl_html_b21fdf5edfd402bb.jpg)
+<img src="/assets/transformer.png" alt="Logo" width="100%">
 
 LSTM:
-
-![](RackMultipart20230509-1-7v8fvl_html_54a2514f76dfecb3.png)
+<img src="/assets/lstm.png" alt="Logo" width="100%">
 
 MLP Classifier:
-
-![](RackMultipart20230509-1-7v8fvl_html_e5e395438d926764.png)
+<img src="/assets/mlp.png" alt="Logo" width="100%">
 
 Attention Model:
-
-![](RackMultipart20230509-1-7v8fvl_html_19289cb4e0bd7f40.jpg)
+<img src="/assets/attention.png" alt="Logo" width="100%">
 
 We faced some implementation issues. In each stage we passed, we encountered some problems, some of which took days to solve. The data processing stage probably took the longest. A model can only be as good as the data gets passed into it. Vectorizing the semantics of a word and embedding it for conception that works with the various models we have was a problem. For MLP and RNN, it wasn't as hard. But something like a transformer model needs the data to be grouped and encoded in a significantly different way. Once we were able to split up the code in a way where there was a separation of concerns, we were able to implement the different encoding techniques in different ways.
 
@@ -187,9 +167,9 @@ When we need to check how good our model is, we have to look at different things
 
 The training time of our best models varies. The LSTM, by itself, is around 50-55 minutes. For the Attention Model, it was around 40-45. This could be explained by the use of CUDA acceleration instead of a CPU. The sequential processing of an LSTM makes it difficult to parallelize the computations efficiently, which can slow down training, especially for large datasets while, on the other hand, transformer models will have a more parallelizable architecture that GPUs can use more efficiently. The LSTM was around 10 MB while the transformer was 50 MB. When looking for a small binary, the LSTM has the upper hand. Overall, one could conclude that the difference of 10mb to 50mb is quite more significant than a difference of 10 minutes during training, so LSTM for the most part has the upper hand here.
 
-Here are some examples of output from the model: ![](RackMultipart20230509-1-7v8fvl_html_bf9744cb3afb5426.png)
-
-![](RackMultipart20230509-1-7v8fvl_html_6af51e08ef369f5a.png)
+Here are some examples of output from the model:
+<img src="/assets/output1.png" alt="Logo" width="100%">
+<img src="/assets/output2.png" alt="Logo" width="100%">
 
 # **Discussion**
 
