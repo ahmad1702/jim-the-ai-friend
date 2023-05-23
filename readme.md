@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 
 <div align="center">
-    <h1 style="font-weight: 900" align="center">ChatAIML2023</h3>
+    <h1 style="font-weight: 900" align="center">Jim the AI Friend</h3>
     <img src="/assets/readme-header.png" alt="Logo" width="100%">
 </div>
 
